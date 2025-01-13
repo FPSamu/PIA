@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-signup.css">
+    <link rel="stylesheet" href="style-portrait-signup.css">
+    <title>Registro</title>
+</head>
+<body>
+    <div id="form-panel">
+        <div class="image">
+            <img src="images/logo.png" alt="logo">
+            <p>Personal Income Assistant</p>
+        </div>
+        <div class="page-title">
+            <h1>Crear una cuenta</h1>
+            <p>Comienza a tener el control de tu dinero</p>
+        </div>
+        <form id="signup-form">
+            <label for="email">Correo electrónico</label>
+            <input type="email" id="signup-email" placeholder="username@email.com" required />
+            <label for="text">Nombre de usuario</label>
+            <input type="text" id="signup-name" placeholder="Usuario" required />
+            <label for="password">Contraseña</label>
+            <input type="password" id="signup-password" placeholder="Contraseña" required />
+            <button type="submit">Crear cuenta</button>
+        </form>
+        <p id="singin-link">¿Ya tienes cuenta?<a href="login.html">¡Inicia sesión!</a></p>
+    </div>
+    <span id="middle-span"></span>
+    <div id="dashboard-info">
+        <h2>Conoce el panel principal</h2>
+        <p>Toda la informacion sobre tus finanzas en un solo lugar</p>
+        <img src="images/screen.png">
+    </div>
+    <script src="js/signup.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="images/logo.png" type="image/png">
+    <link rel="stylesheet" href="style-outcome.css">
+    <link rel="stylesheet" href="style-portrait-outcome.css">
+    <title>PIA - Personal Income Assistant</title>
+</head>
+
+<body>
+    <div id="header">
+        <div id="info-bar">
+            <div id="notification-images">
+                <img src="images/notification-blank.png" id="notification-blank" class="notification-image"
+                    alt="No notifications">
+                <img src="images/notification-on.png" id="notification-on" class="notification-image"
+                    alt="Some notifications">
+            </div>
+            <img src="images/large-logo.png" id="large-logo" alt="logo">
+            <div id="user-info">
+                <h3 id="username-name" dclass="username"></h3>
+                <img id="profile-pic" alt="Profile Picture">
+            </div>
+        </div>
+        <nav class="nav-pages">
+            <ul>
+                <a href="index.html">
+                    <li id="nav-panel">Panel</li>
+                </a>
+                <span></span>
+                <a href="income.html">
+                    <li id="nav-outcome">Ingresos</li>
+                </a>
+                <span></span>
+                <a href="">
+                    <li id="nav-outcome">Egresos</li>
+                </a>
+                <!-- <span></span>
+                <a href="">
+                    <li id="nav-transfer">Transferir</li>
+                </a> -->
+            </ul>
+        </nav>
+    </div>
+    <div id="content">
+        <div id="movements-dates">
+            <div id="movements-list"></div>
+        </div>
+        <div id="general-info">
+            <div id="just-info">
+                <h2 id="monthly-income"></h2>
+                <span id="quantity"></span>
+            </div>
+            <div id="add-outcome-button">
+                <div id="horizontal"></div>
+            </div>
+        </div>
+    </div>
+
+    <div id="popup" class="hidden">
+        <div id="popup-content">
+            <h3>Añadir ingreso</h3>
+            <div id="form-div">
+                <form>
+                    <label for="outcome-account">Cuenta</label>
+                    <select class="outcome-form" id="outcome-account" name="outcome-account">
+                        <option value="total-money">Efectivo</option>
+                        <option value="credit-used">Credito</option>
+                        <option value="savings">Ahorro</option>
+                    </select>
+                    <label for="outcome-amount">Cantidad</label>
+                    <input class="outcome-form" type="number" id="outcome-amount" placeholder="Ingresa la cantidad">
+                    <label for="outcome-amount">Fecha</label>
+                    <input class="outcome-form" type="datetime-local" id="outcome-date">
+                </form>
+                <span></span>
+                <div class="radio-container">
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Entrada" name="areaGroup" class="custom-area">
+                        <label for="Entrada" class="area-label"></label>
+                        <label for="Entrada" class="text-label">Ingreso</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Comida" name="areaGroup" class="custom-area">
+                        <label for="Comida" class="area-label"></label>
+                        <label for="Comida" class="text-label">Comida</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Gasolina" name="areaGroup" class="custom-area">
+                        <label for="Gasolina" class="area-label"></label>
+                        <label for="Gasolina" class="text-label">Gasolina</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Casa" name="areaGroup" class="custom-area">
+                        <label for="Casa" class="area-label"></label>
+                        <label for="Casa" class="text-label">Casa</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Regalos" name="areaGroup" class="custom-area">
+                        <label for="Regalos" class="area-label"></label>
+                        <label for="Regalos" class="text-label">Regalos</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Carro" name="areaGroup" class="custom-area">
+                        <label for="Carro" class="area-label"></label>
+                        <label for="Carro" class="text-label">Carro</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Transporte" name="areaGroup" class="custom-area">
+                        <label for="Transporte" class="area-label"></label>
+                        <label for="Transporte" class="text-label">Transporte</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Educación" name="areaGroup" class="custom-area">
+                        <label for="Educación" class="area-label"></label>
+                        <label for="Educación" class="text-label">Educación</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Inversión" name="areaGroup" class="custom-area">
+                        <label for="Inversión" class="area-label"></label>
+                        <label for="Inversión" class="text-label">Inversiones</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Ropa" name="areaGroup" class="custom-area">
+                        <label for="Ropa" class="area-label"></label>
+                        <label for="Ropa" class="text-label">Ropa</label>
+                    </div>
+                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
+                        <input type="radio" id="Suscripciones" name="areaGroup" class="custom-area">
+                        <label for="Suscripciones" class="area-label"></label>
+                        <label for="Suscripciones" class="text-label">Suscripción</label>
+                    </div>
+                </div>
+            </div>
+            <div id="buttons">
+                <button id="close-popup">Cancelar</button>
+                <button id="add">Añadir</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/add-outcome.js"></script>
+</body>
+
+</html>
