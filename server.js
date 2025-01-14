@@ -3,25 +3,26 @@ import cors from 'cors';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import getUserData from './api/get-user-data.js';  // Import the getUserData function
+import { fileURLToPath } from 'url';
+import path from 'path';
 
 dotenv.config();
 const app = express();
 
 app.use(express.json());
 
-import path from 'path';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const PORT = process.env.PORT || 3000;
 
-// Serve static files from the "public" directory
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Default route for '/'
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-app.use(cors());  // Apply CORS with custom options
+// app.use(cors());  // Apply CORS with custom options
 
 // MongoDB client connection
 const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
