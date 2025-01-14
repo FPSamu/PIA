@@ -9,10 +9,19 @@ const app = express();
 
 app.use(express.json());
 
+import path from 'path';
+
+const PORT = process.env.PORT || 3000;
+
+// Serve static files from the "public" directory
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Default route for '/'
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 app.use(cors());  // Apply CORS with custom options
-
-const port = 3000;
 
 // MongoDB client connection
 const client = new MongoClient(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
@@ -696,6 +705,6 @@ app.get('/api/movements/:email', async (req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
