@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-portrait.css">
+    <link rel="icon" href="images/logo.png" type="image/png">
+
+    <title>PIA - Personal Income Assistant</title>
+</head>
+
+<body>
+    <div id="header">
+        <div id="info-bar">
+            <div id="notification-images">
+                <img src="images/notification-blank.png" id="notification-blank" class="notification-image"
+                    alt="No notifications">
+                <img src="images/notification-on.png" id="notification-on" class="notification-image"
+                    alt="Some notifications">
+            </div>
+            <img src="images/large-logo.png" id="large-logo" alt="logo">
+            <div id="user-info">
+                <h3 id="username-name" dclass="username"></h3>
+                <img id="profile-pic" alt="Profile Picture">
+            </div>
+        </div>
+        <nav class="nav-pages">
+            <ul>
+                <a href="">
+                    <li id="nav-panel">Panel</li>
+                </a>
+                <span></span>
+                <a href="income.html">
+                    <li id="nav-income">Ingresos</li>
+                </a>
+                <span></span>
+                <a href="outcome.html">
+                    <li id="nav-outcome">Egresos</li>
+                </a>
+                <!-- <span></span>
+                <a href="">
+                    <li id="nav-transfer">Transferir</li>
+                </a> -->
+            </ul>
+        </nav>
+    </div>
+
+    <div id="main-panel" class="main-wrapper">
+        <aside id="credit-panel">
+            <h2>Credito</h2>
+            <div class="chart-div">
+                <canvas id="creditChart" class="creditChart-div"></canvas>
+            </div>
+            <div id="credit-panel-info" class="panel-info">
+                <h3>¡CUIDADO!</h3>
+                <span class="motivation-panel"></span>
+            </div>
+        </aside>
+        <center>
+            <div id="avaible-panel">
+                <h2>Disponible</h2>
+                <span id="available-quantity"></span>
+            </div>
+            <div id="notification-panel" style="display: none;">
+                <span>
+                    <p>!</p>Tienes nuevas recomendaciones
+                </span>
+            </div>
+        </center>
+        <aside>
+            <div id="savings-panel">
+                <h2>Ahorro</h2>
+                <div>
+                    <div class="chart-div">
+                        <canvas id="savingsChart" class="savingsChart-div"></canvas>
+                    </div>
+                </div>
+                <div id="savings-panel-info" class="panel-info">
+                    <h3>¡BIEN HECHO!</h3>
+                    <span class="motivation-panel"></span>
+                </div>
+                <h2></h2>
+            </div>
+        </aside>
+        <a href="" id="scroll-right-arrow"><img src="images/scroll-right-arrow.png"></a>
+        <div id="settings-section">
+            <p>Ajustes</p>
+            <img src="images/settings.png" alt="settings">
+        </div>
+        <div id="movements-section-button-right">
+            <p>Movimientos</p>
+            <img src="images/arrow-scroll-right.png" alt="scroll-right">
+        </div>
+    </div>
+
+    <div id="movements-panel">
+        <h2>Movimientos</h2>
+        <div id="movements-panel-content">
+            <a href="" id="scroll-left-arrow"><img src="images/scroll-left-arrow.png"></a>
+            <div id="movements-section-button-left">
+                <img src="images/arrow-scroll-left.png" alt="scroll-left">
+                <p>Panel</p>
+            </div>
+            <aside id="movements-graph">
+                <div>
+                    <canvas id="movements-graph-canvas"></canvas>
+                </div>
+                <div id="movements-graph-info" style="font-family: 'Aileron';"></div>
+            </aside>
+            <aside id="movements-dates">
+                <div id="movements-list"></div>
+            </aside>
+        </div>
+    </div>
+
+    <div id="overlay"></div>
+    <div id="popup">
+        <h3>¡Para comenzar!</h3>
+        <p>Registra un límite para tu cuenta de crédito y una meta de ahorro</p>
+        <p id="landscape-disclaimer" style="font-size: .8vw; margin-top: .5vh;">(Podras modificar esta información cuando gustes)</p>
+        <p id="portrait-disclaimer" style="font-size: 1.5vh;">(Podras modificar esta información cuando gustes)</p>
+        <form id="set-credit-limit-and-savings-goal">
+            <div>
+                <label for="credit-limit">Límite de crédito*</label>
+                <input type="number" name="" id="credit-limit">
+            </div>
+            <div>
+                <label for="cash">Efectivo</label>
+                <input type="number" name="" id="cash">
+            </div>
+            <div>
+                <label for="savings-goal">Meta de ahorro*</label>
+                <input type="number" name="" id="savings-goal">
+            </div>
+        </form>
+        <div id="buttons-div">
+            <button id="close-popup">Cerrar</button>
+            <button id="register">Registrar</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+    <script src="js/credit-chart.js"></script>
+    <script src="js/savings-chart.js"></script>
+</body>
+
+</html>

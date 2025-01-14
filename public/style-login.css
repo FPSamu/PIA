@@ -1,0 +1,132 @@
+@media (orientation: landscape) {
+    @font-face {
+        font-family: 'Aileron';
+        font-style: bold;
+        font-weight: 700;
+        src: url(fonts/aileron/Aileron-Bold.woff) format('woff');
+    }
+
+    @font-face {
+        font-family: 'Aileron';
+        font-style: bold;
+        font-weight: 400;
+        src: url(fonts/aileron/Aileron-Regular.woff ) format('woff');
+    }
+
+    body {
+        font-family: "Aileron";
+        background-color: #141414;
+        color: #fff;
+        display: flex;
+        overflow: hidden;
+        margin: 0;
+        background-image: linear-gradient(to right, #141414 50%, rgba(20, 20, 20, 0)), url(images/login-background.jpg);
+        background-size: cover;
+        background-repeat: no-repeat;
+        height: 100vh;
+        width: 100vw;
+    }
+
+    #form-panel {
+        position: relative;
+        z-index: 10;
+    }
+
+    #form-panel .image {
+        position: relative;
+        display: inline-block;
+        width: 10vw;
+        height: 0;
+        top: 75vh;
+        left: 80vw;
+    }
+
+    .image img {
+        display: block;
+        width: 100%;
+        margin-left: 3vw;
+    }
+
+    .image p {
+        position: absolute;
+        font-size: 1vw;
+        top: 3.7vh;
+        left: 11vw;
+        font-weight: 400;
+    }
+
+    .page-title {
+        margin: 25vh 0 0 10vw;
+    }
+
+    .page-title p {
+        font-size: 1vw;
+        font-weight: 700;
+        color: #697173;
+        margin-bottom: 0;
+    }
+
+    .page-title h1 {
+        margin-top: 1vh;
+        font-size: 2.5vw;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        margin: 5vh 0 0 10vw;
+        font-family: 'Aileron';
+        font-weight: 400;
+    }
+
+    form label {
+        font-size: .8vw;
+        font-weight: 400;
+        margin: 0 0 1vh 0;
+        letter-spacing: .15vw;
+        color: #b1bcbf;
+    }
+
+    form input {
+        height: 4vh;
+        margin-bottom: 2vh;
+        background-color: #141414;
+        border: none;
+        border: .215vh solid #435257;
+        border-radius: .8vh;
+        padding-left: .5vw;
+        font-size: 0.9vw;
+        color: #fff;
+        z-index: 9999;
+    }
+
+    form input:focus {
+        outline: none;
+    }
+
+    form button {
+        color: #fff;
+        font-weight: 700;
+        font-size: 1.4vw;
+        border: 0;
+        border-radius: 0.8vh;
+        padding: 1vh 0 1vh 0;
+        background-color: #435257;
+        z-index: 9999;
+        cursor: pointer;
+    }
+
+    #form-panel #signup-link {
+        margin-left: 10vw;
+        font-size: .9vw;
+        font-weight: 400;
+        color: #b1bcbf;
+    }
+
+    #signup-link a {
+
+        margin-left: 0.5vw;
+        color: #809ba4;
+    }
+}
