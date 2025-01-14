@@ -28,7 +28,7 @@ signinForm.addEventListener("submit", async (e) => {
             return;
         }
 
-        window.location.href = "index.html";
+        window.location.href = "panel.html";
     } catch (error) {
         console.error("Error signing in:", error);
 
