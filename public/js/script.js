@@ -59,7 +59,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (data.credit_limit !== undefined) {
             const motivationPanel = document.querySelector('#credit-panel-info .motivation-panel');
-            motivationPanel.textContent = `Tu limite de credito es de $${data.credit_limit}`;
+            motivationPanel.textContent = `Tu límite de crédito es de $${data.credit_limit}`;
         } else {
             console.error("Credit limit not found.");
             const motivationPanel = document.querySelector('#credit-panel-info .motivation-panel');
