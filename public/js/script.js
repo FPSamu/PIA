@@ -488,3 +488,30 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     drawPieChart();
 });
+
+document.addEventListener('DOMContentLoaded', async function () {
+    try {
+        // Get the user's email (e.g., from a session or a global variable)
+        const email = localStorage.getItem('signedInEmail');
+        
+        // Fetch the user's notifications from the API
+        const response = await fetch(`/api/user/notifications?email=${email}`);
+        const data = await response.json();
+        
+        // Check if there's any notification with seen: false
+        const unseenNotification = data.find(notification => !notification.seen);
+        
+        // Get the notification panel element
+        const notificationPanel = document.getElementById('notification-panel');
+        
+        // Show or hide the notification panel based on unseen notifications
+        if (unseenNotification) {
+            notificationPanel.style.display = 'block';  // Show if there's an unseen notification
+        } else {
+            notificationPanel.style.display = 'none';   // Hide if there are no unseen notifications
+        }
+    } catch (error) {
+        console.error('Error fetching notifications:', error);
+    }
+});
+

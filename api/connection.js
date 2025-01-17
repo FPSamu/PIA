@@ -13,7 +13,6 @@ async function connectDB() {
     try {
         if (!client.topology || !client.topology.isConnected()) {
             await client.connect();
-            console.log("Successfully connected to MongoDB Atlas!");
         }
         return client;
     } catch (error) {
