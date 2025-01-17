@@ -82,6 +82,7 @@ app.post('/signup', async (req, res) => {
             savings_goal: 0,
             profile_pic: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/default-profile-pic.webp',
             movements: [
+                
             ],
             areas: [
                 {
@@ -139,6 +140,9 @@ app.post('/signup', async (req, res) => {
                     background: '#312882',
                     icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/subscriptions-icon.webp'
                 }
+            ],
+            notifications: [
+
             ]
         });
 
