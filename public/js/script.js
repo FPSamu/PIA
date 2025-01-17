@@ -491,13 +491,23 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
-        // Get the user's email (e.g., from a session or a global variable)
-        const email = localStorage.getItem('signedInEmail');
+        // Get the user's email from localStorage
+        const email = localStorage.getItem('signedInEmail');  // Assuming email is stored in localStorage
+        
+        if (!email) {
+            console.error('No email found in localStorage.');
+            return;
+        }
         
         // Fetch the user's notifications from the API
-        const response = await fetch(`/api/user/notifications?email=${email}`);
+        const response = await fetch(`/api/user/notifications/${email}`);
         const data = await response.json();
         
+        if (!Array.isArray(data)) {
+            console.error('Unexpected response format:', data);
+            return;
+        }
+
         // Check if there's any notification with seen: false
         const unseenNotification = data.find(notification => !notification.seen);
         

@@ -709,38 +709,31 @@ app.get('/api/movements/:email', async (req, res) => {
     }
 });
 
+app.get('/api/user/notifications/:email', async (req, res) => {
+    const { email } = req.params;
+
+    if (!email) {
+        return res.status(400).json({ message: "Email is required." });
+    }
+
+    try {
+        const db = await connectDB();
+        const user = await db.collection('users').findOne({ email });
+
+        if (!user || !user.notifications) {
+            return res.status(404).json({ message: "User or notifications not found." });
+        }
+
+        // Send notifications array back to frontend
+        res.status(200).json(user.notifications);
+    } catch (error) {
+        console.error("Error fetching notifications:", error);
+        res.status(500).json({ message: "An error occurred while fetching notifications." });
+    } finally {
+        await client.close();  // Ensure the client connection is closed
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
-});
-
-app.get('/api/user/notifications', async (req, res) => {
-    try {
-        const userEmail = req.query.email; // Get email from query parameters or session
-
-        if (!userEmail) {
-            return res.status(400).json({ error: 'Email parameter is required' });
-        }
-
-        // Connect to the MongoDB server
-        await client.connect();
-        const db = client.db(dbName);
-        const usersCollection = db.collection('users');  // Make sure your collection is called 'users'
-
-        // Fetch the user document by email
-        const user = await usersCollection.findOne({ email: userEmail });
-
-        if (!user) {
-            return res.status(404).json({ error: 'User not found' });
-        }
-
-        // Return the notifications array to the frontend
-        res.json(user.notifications);
-    } catch (error) {
-        console.error('Error fetching notifications:', error);
-        res.status(500).json({ error: 'Internal server error' });
-    } finally {
-        // Ensure the client connection is closed
-        await client.close();
-    }
 });
