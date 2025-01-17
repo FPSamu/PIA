@@ -1,5 +1,4 @@
 import express from 'express';
-import cors from 'cors';
 import { MongoClient } from 'mongodb';
 import dotenv from 'dotenv';
 import getUserData from './api/get-user-data.js';  // Import the getUserData function
