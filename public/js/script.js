@@ -493,16 +493,16 @@ document.addEventListener('DOMContentLoaded', async function () {
     try {
         // Get the user's email from localStorage
         const email = localStorage.getItem('signedInEmail');  // Assuming email is stored in localStorage
-        
+
         if (!email) {
             console.error('No email found in localStorage.');
             return;
         }
-        
+
         // Fetch the user's notifications from the API
         const response = await fetch(`/api/user/notifications/${email}`);
         const data = await response.json();
-        
+
         if (!Array.isArray(data)) {
             console.error('Unexpected response format:', data);
             return;
@@ -510,10 +510,10 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Check if there's any notification with seen: false
         const unseenNotification = data.find(notification => !notification.seen);
-        
+
         // Get the notification panel element
         const notificationPanel = document.getElementById('notification-panel');
-        
+
         // Show or hide the notification panel based on unseen notifications
         if (unseenNotification) {
             notificationPanel.style.display = 'block';  // Show if there's an unseen notification
@@ -525,3 +525,42 @@ document.addEventListener('DOMContentLoaded', async function () {
     }
 });
 
+document.getElementById('notificatons-panel').addEventListener('click', async function (e) {
+    const email = localStorage.getItem('signedInEmail');  // Assuming email is stored in localStorage
+
+    try {
+        const response = await fetch(`/api/user/notifications/${email}`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch notifications');
+        }
+
+        const notifications = await response.json();
+        if (notifications && notifications.length > 0) {
+            const latestNotification = notifications[0].message;  // Assuming you want to display the most recent notification.
+
+            // Display the notification in the popup
+            document.getElementById('notification-message').innerText = latestNotification;
+
+            // Show the notifications popup
+            document.getElementById('notifications-popup').style.display = 'block';
+
+            await fetch(`/api/user/notifications/mark-seen/${email}`, {
+                method: 'PATCH',  // Use PATCH to update part of the document
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ notifications }),
+            });
+        } else {
+            alert('No notifications available.');
+        }
+    } catch (error) {
+        console.error("Error fetching notifications:", error);
+        alert('An error occurred while fetching notifications.');
+    }
+});
+
+// Close the notification popup
+document.getElementById('close-notifications-popup').addEventListener('click', function() {
+    document.getElementById('notifications-popup').style.display = 'none';
+});

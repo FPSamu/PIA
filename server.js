@@ -733,6 +733,46 @@ app.get('/api/user/notifications/:email', async (req, res) => {
     }
 });
 
+app.patch('/api/user/notifications/mark-seen/:email', async (req, res) => {
+    const { email } = req.params;
+    const { notifications } = req.body;
+
+    if (!email || !notifications) {
+        return res.status(400).json({ message: "Email and notifications are required." });
+    }
+
+    try {
+        const db = await connectDB();
+        const user = await db.collection('users').findOne({ email });
+
+        if (!user || !user.notifications) {
+            return res.status(404).json({ message: "User or notifications not found." });
+        }
+
+        // Update all notifications with seen = false to true
+        const updatedNotifications = user.notifications.map(notification => {
+            if (!notification.seen) {
+                return { ...notification, seen: true };
+            }
+            return notification;
+        });
+
+        // Update the user's notifications in the database
+        await db.collection('users').updateOne(
+            { email },
+            { $set: { notifications: updatedNotifications } }
+        );
+
+        res.status(200).json({ message: "Notifications marked as seen." });
+    } catch (error) {
+        console.error("Error updating notifications:", error);
+        res.status(500).json({ message: "An error occurred while updating notifications." });
+    } finally {
+        await client.close();  // Ensure the client connection is closed
+    }
+});
+
+
 app.listen(PORT, () => {
     console.log(`Server running on http://localhost:${PORT}`);
 });
