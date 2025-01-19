@@ -63,7 +63,7 @@
                 <h2>Disponible</h2>
                 <span id="available-quantity"></span>
             </div>
-            <div id="notification-panel" style="display: none;">
+            <div id="notification-panel" style="display: none; cursor: pointer;">
                 <span>
                     <p>!</p>Tienes nuevas recomendaciones
                 </span>
@@ -120,7 +120,7 @@
         <h3>¡Para comenzar!</h3>
         <p>Registra un límite para tu cuenta de crédito y una meta de ahorro</p>
         <p id="landscape-disclaimer" style="font-size: .8vw; margin-top: .5vh;">(Podras modificar esta información cuando gustes)</p>
-        <p id="portrait-disclaimer" style="font-size: 1.5vh;">(Podras modificar esta información cuando gustes)</p>
+        <p id="portrait-disclaimer" style="font-size: 1.5vh;">(Podrás modificar esta información cuando gustes)</p>
         <form id="set-credit-limit-and-savings-goal">
             <div>
                 <label for="credit-limit">Límite de crédito*</label>
@@ -141,10 +141,9 @@
         </div>
     </div>
 
-    <div id="notifications-popup" style="display: none;">
+    <div id="notications-popup-overlay"></div>
+    <div id="notifications-popup">
         <div id="notifications-popup-content">
-            <h3>¡Nuevas recomendaciones!</h3>
-            <p id="notification-message"></p>
         </div>
         <button id="close-notifications-popup">Cerrar</button>
     </div>

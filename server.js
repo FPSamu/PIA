@@ -728,51 +728,37 @@ app.get('/api/user/notifications/:email', async (req, res) => {
     } catch (error) {
         console.error("Error fetching notifications:", error);
         res.status(500).json({ message: "An error occurred while fetching notifications." });
-    } finally {
-        await client.close();  // Ensure the client connection is closed
     }
 });
 
 app.patch('/api/user/notifications/mark-seen/:email', async (req, res) => {
     const { email } = req.params;
-    const { notifications } = req.body;
 
-    if (!email || !notifications) {
-        return res.status(400).json({ message: "Email and notifications are required." });
+    if (!email) {
+        return res.status(400).json({ message: "Email is required" });
     }
 
     try {
         const db = await connectDB();
-        const user = await db.collection('users').findOne({ email });
+        const usersCollection = db.collection('users');
 
-        if (!user || !user.notifications) {
-            return res.status(404).json({ message: "User or notifications not found." });
-        }
-
-        // Update all notifications with seen = false to true
-        const updatedNotifications = user.notifications.map(notification => {
-            if (!notification.seen) {
-                return { ...notification, seen: true };
-            }
-            return notification;
-        });
-
-        // Update the user's notifications in the database
-        await db.collection('users').updateOne(
-            { email },
-            { $set: { notifications: updatedNotifications } }
+        const result = await usersCollection.updateOne(
+            { email, "notifications.seen": false },
+            { $set: { "notifications.$.seen": true } }
         );
 
-        res.status(200).json({ message: "Notifications marked as seen." });
+        if (result.modifiedCount === 0) {
+            return res.status(404).json({ message: "No unseen notifications found" });
+        }
+
+        res.status(200).json({ message: "Notification marked as seen" });
     } catch (error) {
-        console.error("Error updating notifications:", error);
-        res.status(500).json({ message: "An error occurred while updating notifications." });
-    } finally {
-        await client.close();  // Ensure the client connection is closed
+        console.error("Error marking notification:", error);
+        res.status(500).json({ message: "Server error" });
     }
 });
 
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+app.listen(port, () => {
+    console.log(`Server running on http://localhost:${port}`);
 });

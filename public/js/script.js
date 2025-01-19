@@ -492,7 +492,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 document.addEventListener('DOMContentLoaded', async function () {
     try {
         // Get the user's email from localStorage
-        const email = localStorage.getItem('signedInEmail');  // Assuming email is stored in localStorage
+        const email = localStorage.getItem('signedInEmail'); // Assuming email is stored in localStorage
 
         if (!email) {
             console.error('No email found in localStorage.');
@@ -516,51 +516,116 @@ document.addEventListener('DOMContentLoaded', async function () {
 
         // Show or hide the notification panel based on unseen notifications
         if (unseenNotification) {
-            notificationPanel.style.display = 'block';  // Show if there's an unseen notification
+            notificationPanel.style.display = 'block'; // Show if there's an unseen notification
         } else {
-            notificationPanel.style.display = 'none';   // Hide if there are no unseen notifications
+            notificationPanel.style.display = 'none'; // Hide if there are no unseen notifications
+        }
+
+        if (unseenNotification) {
+            const notificationsResponse = await fetch(`/api/user/notifications/${email}`);
+            if (!notificationsResponse.ok) {
+                throw new Error('Failed to fetch notifications');
+            }
+
+            const notifications = await notificationsResponse.json();
+            if (notifications && notifications.length > 0) {
+                const latestNotification = notifications[0].message;
+
+                // Parse the message into sections
+                const lines = latestNotification.split('\n').filter(line => line.trim() !== ''); // Remove empty lines
+                const greeting = lines[0]; // First line is the greeting
+                const about = lines[1]; // Second line is the "about" text
+                const recommendations = lines.slice(2, -1); // Middle lines (excluding the last one)
+                const finalAdvice = lines[lines.length - 1]; // Last line is the final advice
+
+                const contentDiv = document.getElementById('notifications-popup-content');
+                contentDiv.innerHTML = ''; // Clear previous content
+
+                // Add the greeting
+                const greetingElement = document.createElement('h3');
+                greetingElement.textContent = greeting;
+                contentDiv.appendChild(greetingElement);
+
+                // Add the "about" text
+                const aboutElement = document.createElement('p');
+                aboutElement.textContent = about;
+                aboutElement.classList.add('about-text'); // Apply specific styles
+                contentDiv.appendChild(aboutElement);
+
+                // Add recommendations without numbering
+                recommendations.forEach(line => {
+                    // Remove numbering (e.g., "1.", "2.") at the start of the line
+                    const lineWithoutNumber = line.replace(/^\d+\.\s*/, '');
+
+                    // Check if the line is a title (inside ** **)
+                    const match = lineWithoutNumber.match(/\*\*(.*?)\*\*/);
+                    if (match) {
+                        const titleText = match[1]; // Extract text inside **
+                        const contentText = lineWithoutNumber.replace(/\*\*(.*?)\*\*/, '').trim(); // Remove the title from the line
+
+                        // Create the title element
+                        const titleElement = document.createElement('h4');
+                        titleElement.textContent = titleText;
+                        titleElement.classList.add('recommendation-title'); // Apply specific styles
+                        contentDiv.appendChild(titleElement);
+
+                        // Create the content element
+                        const contentElement = document.createElement('p');
+                        contentElement.textContent = contentText;
+                        contentElement.classList.add('recommendation-content'); // Apply specific styles
+                        contentDiv.appendChild(contentElement);
+                    }
+                });
+
+                // Add the final advice (if it exists)
+                if (finalAdvice) {
+                    const finalAdviceElement = document.createElement('p');
+                    finalAdviceElement.textContent = finalAdvice;
+                    finalAdviceElement.classList.add('final-advice'); // Apply specific styles
+                    contentDiv.appendChild(finalAdviceElement);
+                }
+            } else {
+                alert('No notifications available.');
+            }
         }
     } catch (error) {
         console.error('Error fetching notifications:', error);
     }
 });
 
-document.getElementById('notificatons-panel').addEventListener('click', async function (e) {
-    const email = localStorage.getItem('signedInEmail');  // Assuming email is stored in localStorage
+document.getElementById("notification-panel").addEventListener("click", async () => {
+    const email = localStorage.getItem('signedInEmail');  // Get the email from localStorage
+    
+    if (!email) {
+        console.error('No email found in localStorage.');
+        return;
+    }
 
     try {
-        const response = await fetch(`/api/user/notifications/${email}`);
+        const response = await fetch(`/api/user/notifications/mark-seen/${email}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ seen: true }), // Sending the updated status as part of the request body
+        });
+
         if (!response.ok) {
-            throw new Error('Failed to fetch notifications');
+            throw new Error('Failed to update notification status');
         }
 
-        const notifications = await response.json();
-        if (notifications && notifications.length > 0) {
-            const latestNotification = notifications[0].message;  // Assuming you want to display the most recent notification.
-
-            // Display the notification in the popup
-            document.getElementById('notification-message').innerText = latestNotification;
-
-            // Show the notifications popup
-            document.getElementById('notifications-popup').style.display = 'block';
-
-            await fetch(`/api/user/notifications/mark-seen/${email}`, {
-                method: 'PATCH',  // Use PATCH to update part of the document
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ notifications }),
-            });
-        } else {
-            alert('No notifications available.');
-        }
+        // Proceed to show the notification popup as before
+        document.getElementById('notifications-popup').style.display = 'block';
+        document.getElementById('notications-popup-overlay').style.display = 'block';
     } catch (error) {
-        console.error("Error fetching notifications:", error);
-        alert('An error occurred while fetching notifications.');
+        console.error('Error marking notification as seen:', error);
     }
 });
 
+
 // Close the notification popup
-document.getElementById('close-notifications-popup').addEventListener('click', function() {
+document.getElementById('close-notifications-popup').addEventListener('click', function () {
     document.getElementById('notifications-popup').style.display = 'none';
+    document.getElementById('notications-popup-overlay').style.display = 'none';
+    document.getElementById('notification-panel').style.display = 'none';
 });
