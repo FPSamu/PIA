@@ -769,6 +769,6 @@ app.patch('/api/user/notifications/mark-seen/:email', async (req, res) => {
 });
 
 
-app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
 });
