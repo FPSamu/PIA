@@ -95,6 +95,11 @@ app.post('/signup', async (req, res) => {
                     icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/food-icon.webp'
                 },
                 {
+                    name: 'Despensa',
+                    background: '#8da832',
+                    icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/groseries-icon.webp'
+                },
+                {
                     name: 'Gasolina',
                     background: '#3f389c',
                     icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/gas-icon.webp'
@@ -123,6 +128,11 @@ app.post('/signup', async (req, res) => {
                     name: 'Educación',
                     background: '#b83939',
                     icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/school-icon.webp'
+                },
+                {
+                    name: 'Salud',
+                    background: '#a932ab',
+                    icon: 'https://raw.githubusercontent.com/FPSamu/IMAGES/refs/heads/main/health-icon.webp'
                 },
                 {
                     name: 'Ropa',
