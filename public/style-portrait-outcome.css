@@ -142,6 +142,7 @@
         flex-direction: column;
         color: #fff;
         gap: 2vh;
+        width: 90%;
     }
 
     #general-info {
@@ -308,7 +309,7 @@
         flex-wrap: nowrap;
         overflow-x: auto;
         gap: 2vw;
-        padding: 0 1vw;
+        /* padding: 0 1vw; */
     }
     
     .radio-container::-webkit-scrollbar {
@@ -359,12 +360,8 @@
         width: 80%;
     }
 
-    #popup-content #form-div span {
-        position: absolute;
-        width: 80%;
-        height: .2vh;
-        top: 40vh;
-        background-color: #999693;
+    .radio-container {
+        border-bottom: .1vh #aaa solid;
     }
 
     #popup-content div form input,
