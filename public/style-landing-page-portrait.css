@@ -1,0 +1,208 @@
+@font-face {
+    font-family: 'Aileron';
+    font-style: bold;
+    font-weight: 700;
+    src: url(fonts/aileron/Aileron-Bold.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'Aileron';
+    font-style: bold;
+    font-weight: 400;
+    src: url(fonts/aileron/Aileron-Regular.woff) format('woff');
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+@media (orientation: portrait) {
+    body {
+        background-color: #141414;
+        color: #fff;
+        font-family: 'Aileron', sans-serif;
+    }
+
+    header {
+        margin-bottom: 10vh;
+    }
+    
+    #header-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    #header-header img {
+        width: 7rem;
+    }
+
+    #header-header nav {
+        display: none;
+    }
+
+    #header-header nav ul li:hover {
+        color: #fff;
+        transform: scale(1.07);
+    }
+
+    #header-header button {
+        background-color: #fff;
+        color: #141414;
+        border: none;
+        padding: 1.5vh 1vw;
+        font-size: 1rem;
+        border-radius: .7vh;
+        cursor: pointer;
+        margin-right: 2vw;
+    }
+
+    #header-header button:hover {
+        background-color: #aaa;
+        transition: all 300ms ease;
+    }
+
+    #header-content {
+        text-align: center;
+        margin: 0 5vw;
+    }
+
+    #header-content h1 {
+        font-size: 2.5rem;
+        margin-top: 8vh;
+    }
+
+    #header-content p {
+        font-size: 1.5rem;
+        margin-top: 2vh;
+        color: #bfbdbc;
+    }
+
+    #header-content button {
+        border: none;
+        padding: 2vh 1.5vw;
+        font-size: 1rem;
+        border-radius: .7vw;
+        cursor: pointer;
+        margin: 5vh 1vw 0 1vw;
+        width: 15vh;
+    }
+
+    #header-content #log-in {
+        background-color: #101010;
+        color: #fff;
+        border: .1vh solid #333;
+    }
+
+    #header-content #get-started:hover {
+        background-color: #aaa;
+        transition: all 300ms ease;
+    }
+
+    #header-content #log-in:hover {
+        background-color: #333;
+        transition: all 300ms ease;
+    }
+
+    #key-features {
+        background-color: #191919;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 5vh 0 10vh 0;
+    }
+
+    #key-features h2{
+        font-size: 2.3rem;
+        margin-bottom: 5vh;
+    }
+
+    #key-features #features-container {
+        display: grid;
+        gap: 2vw;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        justify-content: center;
+        width: 80%;
+    }
+
+    #key-features #features-container .features {
+        background: #141414; /* Optional: Background color for individual items */
+        box-shadow: #333 0 0 .5vw .005vw;
+        border-radius: .8vw;
+        padding: 2vh 1.5vw;
+    }
+
+    #key-features #features-container .features svg { 
+        width: 3rem;
+        margin: 0 0 2vh 1vw;
+    }
+
+    #key-features #features-container .features h3 {
+        font-size: 1.4rem;
+        margin: 0 0 1vh 1vw;
+    }
+
+    #key-features #features-container .features p {
+        font-size: 1.1rem;
+        color: #ccc;
+        margin: 0 0 1vh 1vw;
+    }
+
+    #promo-panel {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        padding: 8vh;
+    }
+
+    #promo-panel h2 {
+        font-size: 2.5rem;
+    }
+
+    #promo-panel p {
+        margin: 3vh auto;
+        font-size: 1.8rem;
+        color: #ccc;
+    }
+
+    #promo-panel button {
+        background-color: #333;
+        border: none;
+        font-size: 1.2rem;
+        color: #ccc;
+        width: 40%;
+        font-weight: 700;
+        letter-spacing: .1vw;
+        border-radius: .5vw;
+        padding: 2vh 1vw;
+        margin: 0 auto;
+        cursor: pointer;
+    }
+
+    #promo-panel button:hover {
+        background-color: #222;
+        transition: all 300ms ease;
+    }
+    
+    footer {
+        border-top: #202020 .3vh solid;        
+        display: flex;
+        align-items: center;
+        color: #999;
+        padding: 3vh 2vw;
+        gap: 30%;
+        font-size: 1rem;
+    }
+
+    footer a {
+        text-decoration: none;
+        color: #999;
+        cursor: pointer;
+    }
+
+    footer a:hover {
+        color: #ddd;
+        transition: all 200ms ease;
+    }
+}

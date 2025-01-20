@@ -4,29 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" href="images/logo.png" type="image/png">
-    <link rel="stylesheet" href="style-portrait-login.css">
-    <link rel="stylesheet" href="style-login.css">
-    <title>Inicio de Sesion</title>
+    <link rel="stylesheet" href="style-landing-page.css">
+    <link rel="stylesheet" href="style-landing-page-portrait.css">
+    <title>PIA - Personal Income Assistant</title>
 </head>
 <body>
-    <div id="form-panel">
-        <div class="image">
-            <img src="images/logo.png" alt="logo">
-            <p>Personal Income Assistant</p>
+    <header>
+        <div id="header-header">
+            <img src="images/large-logo.png" alt="Logo">
+            <nav>
+                <ul>
+                    <li>Funciones</li>
+                    <li>¿Cómo funciona?</li>
+                </ul>
+            </nav>
+            <button class="go-to-signup">Regístrate</button>
         </div>
-        <div class="page-title">
-            <p>¡BIENVENIDO DE REGRESO!</p>
-            <h1>Inicio de Sesión</h1>
+        <div id="header-content">
+            <h1>Maneja tus finanzas con recomendaciones impulsadas por IA</h1>
+            <p>PIA te ayuda a llevar un registro de tus ingresos y gastos, dándote recomendaciones personalizadas cada semana para mejorar tu salud financiera.</p>
+            <button id="get-started" class="go-to-signup">Comenzar</button>
+            <button id="log-in" class="go-to-login">Iniciar Sesión</button>
         </div>
-        <form id="signin-form">
-            <label for="email">Correo electrónico</label>
-            <input type="email" id="signin-email" placeholder="username@email.com" required />
-            <label for="password">Contraseña</label>
-            <input type="password" id="signin-password" placeholder="Contraseña" required />
-            <button type="submit" type="module">Iniciar sesión</button>
-        </form>
-        <p id="signup-link">¿No tienes una cuenta?<a href="signup.html">¡Regístrate!</a></p>
+    </header>
+    <div id="key-features">
+        <h2>Características principales</h2>
+        <div id="features-container">
+            <div class="features">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                    <path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/>
+                </svg>
+                <div>
+                    <h3>Fácil registro de gastos e ingresos</h3>
+                    <p>Registra rápidamente tus movimientos financieros con una interfaz intuitiva.</p>
+                </div>
+            </div>
+            <div class="features">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                    <path d="M480-80q-83 0-156-31.5t-127-86Q143-252 111.5-325T80-480q0-157 104-270t256-128v120q-103 14-171.5 92.5T200-480q0 116 82 198t198 82q66 0 123.5-28t96.5-76l104 60q-54 75-139 119.5T480-80Zm366-238-104-60q9-24 13.5-49.5T760-480q0-107-68.5-185.5T520-758v-120q152 15 256 128t104 270q0 44-8 85t-26 77Z"/>
+                </svg>
+                <div>
+                    <h3>Visión general financiera</h3>
+                    <p>Ten una imagen clara de tus hábitos financieros y fuentes de ingreso.</p>
+                </div>
+            </div>
+            <div class="features">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                    <path d="M120-120v-80l80-80v160h-80Zm160 0v-240l80-80v320h-80Zm160 0v-320l80 81v239h-80Zm160 0v-239l80-80v319h-80Zm160 0v-400l80-80v480h-80ZM120-327v-113l280-280 160 160 280-280v113L560-447 400-607 120-327Z"/>
+                </svg>
+                <div>
+                    <h3>Análisis financiero semanal</h3>
+                    <p>Recibe información detallada de tus movimientos financieros cada semana.</p>
+                </div>
+            </div>
+            <div class="features">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960" width="24px" fill="#e8eaed">
+                    <path d="M160-120v-200q0-33 23.5-56.5T240-400h480q33 0 56.5 23.5T800-320v200H160Zm200-320q-83 0-141.5-58.5T160-640q0-83 58.5-141.5T360-840h240q83 0 141.5 58.5T800-640q0 83-58.5 141.5T600-440H360ZM240-200h480v-120H240v120Zm120-320h240q50 0 85-35t35-85q0-50-35-85t-85-35H360q-50 0-85 35t-35 85q0 50 35 85t85 35Zm0-80q17 0 28.5-11.5T400-640q0-17-11.5-28.5T360-680q-17 0-28.5 11.5T320-640q0 17 11.5 28.5T360-600Zm240 0q17 0 28.5-11.5T640-640q0-17-11.5-28.5T600-680q-17 0-28.5 11.5T560-640q0 17 11.5 28.5T600-600ZM480-200Zm0-440Z"/>
+                </svg>
+                <div>
+                    <h3>Recomendaciones impulsadas por IA</h3>
+                    <p>Obtén consejos personalizados para mejorar tu salud financiera y alcanzar tus metas.</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <script type="module" src="js/login.js"></script>
+    <div id="promo-panel">
+        <h2>¿Estás listo para tomar control de tus finanzas?</h2>
+        <p>Únete a miles de usuarios que han mejorado su salud financiera con las recomendaciones y análisis personalizado de PIA</p>
+        <button class="go-to-signup">Quiero Comenzar</button>
+    </div>
+    <footer>
+        <p>&copy; 2025 PIA - Personal Income Assistant. Todos los derechos reservados.</p>
+        <a href="mailto:samuel.pia@outlook.com">Contáctanos</a>
+    </footer>
+
+    <script src="js/landing-page-script.js"></script>
 </body>
 </html>

@@ -29,7 +29,7 @@ signupForm.addEventListener('submit', async (e) => {
             alert(result.message || "Hubo un problema al registrarse.");
         }
         
-        window.location.href = "index.html"; 
+        window.location.href = "login.html"; 
     } catch (error) {
         console.log(error);
 
