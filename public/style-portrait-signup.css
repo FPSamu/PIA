@@ -70,7 +70,8 @@
         #signup-form {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: .5rem;
+            margin: 0;
         }
 
         #signup-form label {
@@ -81,7 +82,7 @@
         }
 
         #signup-form input {
-            width: 100%;
+            /* width: 100%; */
             padding: 0.75rem;
             background-color: #141414;
             border: 2px solid #435257;
@@ -115,6 +116,7 @@
         }
 
         #singin-link a {
+            margin-left: .7rem;
             color: #809ba4;
             text-decoration: none;
         }
