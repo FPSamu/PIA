@@ -331,6 +331,10 @@
         background-color: #555;
         border-radius: 1vw;
     }
+
+    .radio-item input[type="radio"] {
+        display: none;
+    }
     
     .radio-item {
         display: flex;
@@ -390,7 +394,7 @@
     }
 
     label {
-        font-size: 2vh;
+        font-size: 1.3rem;
         text-align: start;
         margin: 0 0 .7vh .1vw;
     }
@@ -454,5 +458,112 @@
     .visible {
         visibility: visible;
         opacity: 1;
+    }
+
+    #custom-area-popup {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        visibility: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    #custom-area-popup .popup-content {
+        position: absolute;
+        /* display: flex;
+        flex-direction: column; */
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #222121;
+        color: #fff;
+        padding: 1vh 3.5vw;
+        border-radius: 1vh;
+        width: 90%;
+    }
+
+    #custom-area-popup h3 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 3vh;
+    }
+
+    #custom-area-form {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    #custom-area-popup input,
+    #custom-area-popup button {
+        margin-bottom: 1vh;
+    }
+
+    #custom-area-name {
+        font-size: 1.3rem;
+    }
+
+    #custom-area-popup #custom-area-background {
+        width: 100%;
+    }
+
+    #buttons-custom-area-popup {
+        display: flex;
+        gap: .3vw;
+        justify-content: end;
+    }
+    
+    #close-custom-area-popup{
+        background-color: #222121;
+        border: .3vh #7c0a0a solid;
+        border-radius: 1vh;
+        color: white;
+        padding: 1vh 1vw;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+
+    #add-custom-area-popup{
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 1vh;
+        padding: 1vh 1vw;
+        font-size: 1rem;
+        cursor: pointer;
+    }
+    
+    #close-custom-area-popup:hover {
+        background-color: #7c0a0a
+    }
+
+    #add-custom-area-popup:hover {
+        background-color: #39813d;
+    }
+
+    .icon-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        gap: 1.5vh;
+        height: 20vh;
+        overflow-y: auto;
+        scrollbar-width: none;
+        margin-bottom: 3vh;
+    }
+    
+    .icon-image {
+        width: 3rem;
+        cursor: pointer;
+        border-radius: 1vh;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    
+    .icon-image.selected {
+        transform: scale(1.2);
+        box-shadow: 0 0 1vh #34a85b;
+        border: .2vh solid #34a85b;
     }
 }

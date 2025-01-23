@@ -7,6 +7,7 @@
     <link rel="icon" href="images/logo.png" type="image/png">
     <link rel="stylesheet" href="style-income.css">
     <link rel="stylesheet" href="style-portrait-income.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
     <title>PIA - Personal Income Assistant</title>
 </head>
 
@@ -78,73 +79,7 @@
                     <input class="income-form" type="datetime-local" id="income-date">
                 </form>
                 <span></span>
-                <div class="radio-container">
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Entrada" name="areaGroup" class="custom-area">
-                        <label for="Entrada" class="area-label"></label>
-                        <label for="Entrada" class="text-label">Ingreso</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Comida" name="areaGroup" class="custom-area">
-                        <label for="Comida" class="area-label"></label>
-                        <label for="Comida" class="text-label">Comida</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Despensa" name="areaGroup" class="custom-area">
-                        <label for="Despensa" class="area-label"></label>
-                        <label for="Despensa" class="text-label">Despensa</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Gasolina" name="areaGroup" class="custom-area">
-                        <label for="Gasolina" class="area-label"></label>
-                        <label for="Gasolina" class="text-label">Gasolina</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Casa" name="areaGroup" class="custom-area">
-                        <label for="Casa" class="area-label"></label>
-                        <label for="Casa" class="text-label">Casa</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Regalos" name="areaGroup" class="custom-area">
-                        <label for="Regalos" class="area-label"></label>
-                        <label for="Regalos" class="text-label">Regalos</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Carro" name="areaGroup" class="custom-area">
-                        <label for="Carro" class="area-label"></label>
-                        <label for="Carro" class="text-label">Carro</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Transporte" name="areaGroup" class="custom-area">
-                        <label for="Transporte" class="area-label"></label>
-                        <label for="Transporte" class="text-label">Transporte</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Educación" name="areaGroup" class="custom-area">
-                        <label for="Educación" class="area-label"></label>
-                        <label for="Educación" class="text-label">Educación</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Salud" name="areaGroup" class="custom-area">
-                        <label for="Salud" class="area-label"></label>
-                        <label for="Salud" class="text-label">Salud</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Inversión" name="areaGroup" class="custom-area">
-                        <label for="Inversión" class="area-label"></label>
-                        <label for="Inversión" class="text-label">Inversiones</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Ropa" name="areaGroup" class="custom-area">
-                        <label for="Ropa" class="area-label"></label>
-                        <label for="Ropa" class="text-label">Ropa</label>
-                    </div>
-                    <div class="radio-item" style="width: 5.1vw; height: 5vw;">
-                        <input type="radio" id="Suscripciones" name="areaGroup" class="custom-area">
-                        <label for="Suscripciones" class="area-label"></label>
-                        <label for="Suscripciones" class="text-label">Suscripción</label>
-                    </div>
-                </div>
+                <div class="radio-container"></div>
             </div>
             <div id="buttons">
                 <button id="close-popup">Cancelar</button>
@@ -152,6 +87,26 @@
             </div>
         </div>
     </div>
+
+    <div id="custom-area-popup" class="popup">
+        <div class="popup-content">
+            <h3>Añadir nueva área</h3>
+            <form id="custom-area-form">
+                <label for="custom-area-name">Nombre del área</label>
+                <input class="income-form" type="text" id="custom-area-name" placeholder="Ingresa el nombre del área" required>
+    
+                <label for="custom-area-background">Color de fondo</label>
+                <input class="income-form" type="color" id="custom-area-background" required>
+    
+                <label for="custom-area-icon">Seleccionar icono</label>
+                <div id="icon-grid" class="icon-grid"></div>
+            </form>
+            <div id="buttons-custom-area-popup">
+                <button id="close-custom-area-popup">Cancelar</button>
+                <button id="add-custom-area-popup">Añadir</button>
+            </div>
+        </div>
+    </div>    
 
     <script src="js/add-income.js"></script>
 </body>
