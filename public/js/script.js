@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         if (data.total_money !== undefined) {
             const total_money = document.getElementById('available-quantity');
-            total_money.textContent = `$${data.total_money}`;
+            total_money.textContent = `$${data.total_money.toFixed(2)}`;
         } else {
             console.error("Total money not found.");
         }

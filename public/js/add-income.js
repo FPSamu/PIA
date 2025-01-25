@@ -465,9 +465,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalincomeCell = document.createElement('div');
             totalincomeCell.classList.add('movement-cell');
             const totalincome = groupedMovements[date].totalincome;
-            const formattedTotalincome = `-$${totalincome}`;
+            const formattedTotalincome = `$${totalincome}`;
             totalincomeCell.textContent = formattedTotalincome;
-            totalincomeCell.style.color = '#999693';
+            totalincomeCell.style.color = '#c4ffa7';
 
             dateRow.appendChild(dateCell);
             dateRow.appendChild(totalincomeCell);
