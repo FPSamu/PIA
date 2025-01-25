@@ -43,10 +43,10 @@ document.addEventListener("DOMContentLoaded", async () => {
 });
 
 document.addEventListener("DOMContentLoaded", () => {
-    const addIncomeButton = document.getElementById("add-income-button");
+    const addincomeButton = document.getElementById("add-income-button");
     const popup = document.getElementById("popup");
     const closePopupButton = document.getElementById("close-popup");
-    const addedIncomeButton = document.getElementById("add");
+    const addedincomeButton = document.getElementById("add");
     const radioContainer = document.querySelector(".radio-container");
 
     const showPopup = () => {
@@ -62,9 +62,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     };
 
-    addIncomeButton.addEventListener("click", showPopup);
+    addincomeButton.addEventListener("click", showPopup);
     closePopupButton.addEventListener("click", hidePopup);
-    addedIncomeButton.addEventListener("click", hidePopup);
+    addedincomeButton.addEventListener("click", hidePopup);
 
     const userEmail = localStorage.getItem("signedInEmail");
 
@@ -138,199 +138,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-    const movementsList = document.getElementById('movements-list');
-
-    async function fetchMovements(email) {
-        try {
-            const response = await fetch(`/api/movements/${email}`);
-            if (!response.ok) {
-                throw new Error('Failed to fetch movements');
-            }
-            const data = await response.json();
-            return data.movements;
-        } catch (error) {
-            console.error('Error fetching movements:', error);
-            return [];
-        }
-    }
-
-    function filterIncomeMovementsForCurrentMonth(movements) {
-        const currentDate = new Date();
-        const currentMonth = currentDate.getMonth();
-        const currentYear = currentDate.getFullYear();
-
-        return movements.filter(movement => {
-            const movementDate = new Date(movement.date);
-            return (
-                movement.type === 'income' &&
-                movementDate.getMonth() === currentMonth &&
-                movementDate.getFullYear() === currentYear
-            );
-        });
-    }
-
-    function formatDate(dateString) {
-        const [year, month, day] = dateString.split('T')[0].split('-');
-        const options = { weekday: 'long', day: 'numeric', month: 'long' };
-        const formattedDate = new Intl.DateTimeFormat('es-ES', options).format(new Date(year, month - 1, day));
-
-        const dateParts = formattedDate.split(', ');
-        const weekday = dateParts[0].charAt(0).toUpperCase() + dateParts[0].slice(1);
-        return `${weekday}, ${dateParts[1]}`;
-    }
-
-    function groupIncomeMovementsByDate(movements) {
-        const groupedMovements = {};
-
-        movements.forEach((movement) => {
-            const date = movement.date.split('T')[0];
-
-            if (!groupedMovements[date]) {
-                groupedMovements[date] = {
-                    movements: [],
-                    totalIncome: 0
-                };
-            }
-
-            groupedMovements[date].movements.push(movement);
-            groupedMovements[date].totalIncome += movement.amount;
-        });
-
-        return groupedMovements;
-    }
-
-    function renderGroupedIncomeMovements(groupedMovements) {
-        const sortedDates = Object.keys(groupedMovements).sort((a, b) => new Date(b) - new Date(a));
-
-        sortedDates.forEach((date) => {
-            const formattedDate = formatDate(date);
-
-            let dateDiv = document.querySelector(`#date-${date}`);
-            if (!dateDiv) {
-                dateDiv = document.createElement('div');
-                dateDiv.id = `date-${date}`;
-                dateDiv.classList.add('date-item');
-                movementsList.appendChild(dateDiv);
-            }
-
-            const table = document.createElement('div');
-            table.classList.add('movement-table');
-
-            const dateRow = document.createElement('div');
-            dateRow.classList.add('movement-row');
-
-            const dateCell = document.createElement('div');
-            dateCell.classList.add('movement-cell');
-            dateCell.textContent = formattedDate;
-
-            const totalIncomeCell = document.createElement('div');
-            totalIncomeCell.classList.add('movement-cell');
-            const totalIncome = groupedMovements[date].totalIncome;
-            const formattedTotalIncome = `+$${totalIncome}`;
-            totalIncomeCell.textContent = formattedTotalIncome;
-            totalIncomeCell.style.color = '#c4ffa7';
-
-            dateRow.appendChild(dateCell);
-            dateRow.appendChild(totalIncomeCell);
-            table.appendChild(dateRow);
-
-            groupedMovements[date].movements.forEach((movement) => {
-                const row = document.createElement('div');
-                row.classList.add('movement-row');
-
-                const areaCell = document.createElement('div');
-                areaCell.classList.add('movement-cell');
-                areaCell.textContent = movement.area;
-
-                const amountCell = document.createElement('div');
-                amountCell.classList.add('movement-cell');
-                amountCell.textContent = `$${movement.amount}`;
-                amountCell.style.color = '#c4ffa7';
-
-                row.appendChild(areaCell);
-                row.appendChild(amountCell);
-                table.appendChild(row);
-            });
-
-            let movementInfoDiv = dateDiv.querySelector('.movement-info');
-            if (!movementInfoDiv) {
-                movementInfoDiv = document.createElement('div');
-                movementInfoDiv.classList.add('movement-info');
-                dateDiv.appendChild(movementInfoDiv);
-            }
-
-            movementInfoDiv.appendChild(table);
-        });
-    }
-
-    const email = localStorage.getItem('signedInEmail');
-    if (email) {
-        fetchMovements(email)
-            .then(filterIncomeMovementsForCurrentMonth)
-            .then(groupIncomeMovementsByDate)
-            .then(renderGroupedIncomeMovements);
-    } else {
-        console.error("No user is signed in");
-    }
-});
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//     const entradaRadioButton = document.getElementById('Entrada');
-//     if (entradaRadioButton) {
-//         entradaRadioButton.checked = true;
-//         document.getElementById('Entrada').checked = true;
-//     }
-// });
-
-document.addEventListener('DOMContentLoaded', () => {
-    const currentDate = new Date();
-    const currentMonth = currentDate.getMonth();
-    const currentYear = currentDate.getFullYear();
-
-    const monthNames = [
-        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
-        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
-    ];
-
-    document.getElementById("monthly-income").textContent = `Ingresos de ${monthNames[currentMonth]}`;
-
-    async function fetchMovements(email) {
-        try {
-            const response = await fetch(`/api/movements/${email}`);
-            if (!response.ok) {
-                throw new Error(`Error: ${response.statusText}`);
-            }
-            const data = await response.json();
-
-            const currentMonthIncomes = data.movements.filter(movement => {
-                const movementDate = new Date(movement.date);
-                return (
-                    movementDate.getMonth() === currentMonth &&
-                    movementDate.getFullYear() === currentYear &&
-                    movement.type === "income"
-                );
-            });
-
-            const totalIncome = currentMonthIncomes.reduce((sum, movement) => sum + movement.amount, 0);
-
-            document.getElementById("quantity").textContent = `$${totalIncome.toLocaleString()}`;
-        } catch (error) {
-            console.error("Error fetching movements:", error);
-            document.getElementById("quantity").textContent = "Error fetching data.";
-        }
-    }
-
-    const email = localStorage.getItem('signedInEmail');
-    fetchMovements(email);
-});
-
 document.addEventListener("DOMContentLoaded", () => {
-    const addIncomeButton = document.getElementById("add-income-button");
+    const addincomeButton = document.getElementById("add-income-button");
     const popup = document.getElementById("popup");
     const closePopupButton = document.getElementById("close-popup");
-    const addedIncomeButton = document.getElementById("add");
+    const addedincomeButton = document.getElementById("add");
 
     const showPopup = () => {
         popup.style.visibility = "visible";
@@ -344,9 +156,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 300);
     };
 
-    addIncomeButton.addEventListener("click", showPopup);
+    addincomeButton.addEventListener("click", showPopup);
     closePopupButton.addEventListener("click", hidePopup);
-    addedIncomeButton.addEventListener("click", hidePopup);
+    addedincomeButton.addEventListener("click", hidePopup);
 
     const userEmail = localStorage.getItem("signedInEmail");
 
@@ -354,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
         alert("User not logged in! Please log in first.");
         return;
     }
-   
+
     fetch(`/api/areas/${userEmail}`)
     .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch areas data");
@@ -482,13 +294,267 @@ document.addEventListener("DOMContentLoaded", () => {
                     console.error("Error adding custom area:", error);
                 });
         });
-        
+
         showPopup();
     }
 });
 
 
+document.getElementById("add").addEventListener("click", () => {
+    const selectedAccount = document.getElementById("income-account").value;
+    const enteredAmount = parseFloat(document.getElementById("income-amount").value);
+    const enteredDate = document.getElementById("income-date").value;
+    const selectedRadio = document.querySelector('input[name="areaGroup"]:checked');
 
+    let selectedArea;
+    if (selectedRadio) {
+        selectedArea = selectedRadio.id;
+    } else {
+        alert("Please select an area!");
+        return;
+    }
+
+    if (!enteredAmount || isNaN(enteredAmount)) {
+        alert("Please enter a valid amount!");
+        return;
+    }
+
+    if (!enteredDate) {
+        alert("Please select a date!");
+        return;
+    }
+
+    const userEmail = localStorage.getItem("signedInEmail");
+
+    if (!userEmail) {
+        alert("User not logged in! Please log in first.");
+        return;
+    }
+
+    const newMovement = {
+        type: "income",
+        account: selectedAccount,
+        amount: enteredAmount,
+        area: selectedArea,
+        date: enteredDate,
+        email: userEmail,
+    };
+
+    fetch("/api/add-movement-income", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newMovement),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log("income updated:", data);
+
+            // Now update the total_money for the user
+            fetch(`/api/update-total-money/${userEmail}`, {
+                method: "PATCH",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    amount: enteredAmount,
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log("Total money updated:", data);
+                })
+                .catch((error) => {
+                    console.error("Error updating total money:", error);
+                });
+            location.reload();
+        })
+        .catch((error) => {
+            console.error("Error updating income:", error);
+            alert("Failed to update income.");
+        });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const movementsList = document.getElementById('movements-list');
+
+    async function fetchMovements(email) {
+        try {
+            const response = await fetch(`/api/movements/${email}`);
+            if (!response.ok) {
+                throw new Error('Failed to fetch movements');
+            }
+            const data = await response.json();
+            return data.movements;
+        } catch (error) {
+            console.error('Error fetching movements:', error);
+            return [];
+        }
+    }
+
+    function filterincomeMovementsForCurrentMonth(movements) {
+        const currentDate = new Date();
+        const currentMonth = currentDate.getMonth();
+        const currentYear = currentDate.getFullYear();
+
+        return movements.filter(movement => {
+            const movementDate = new Date(movement.date);
+            return (
+                movement.type === 'income' &&
+                movementDate.getMonth() === currentMonth &&
+                movementDate.getFullYear() === currentYear
+            );
+        });
+    }
+
+    function formatDate(dateString) {
+        const [year, month, day] = dateString.split('T')[0].split('-');
+        const options = { weekday: 'long', day: 'numeric', month: 'long' };
+        const formattedDate = new Intl.DateTimeFormat('es-ES', options).format(new Date(year, month - 1, day));
+
+        const dateParts = formattedDate.split(', ');
+        const weekday = dateParts[0].charAt(0).toUpperCase() + dateParts[0].slice(1);
+        return `${weekday}, ${dateParts[1]}`;
+    }
+
+    function groupincomeMovementsByDate(movements) {
+        const groupedMovements = {};
+
+        movements.forEach((movement) => {
+            const date = movement.date.split('T')[0];
+
+            if (!groupedMovements[date]) {
+                groupedMovements[date] = {
+                    movements: [],
+                    totalincome: 0
+                };
+            }
+
+            groupedMovements[date].movements.push(movement);
+            groupedMovements[date].totalincome += movement.amount;
+        });
+
+        return groupedMovements;
+    }
+
+    function renderGroupedincomeMovements(groupedMovements) {
+        const sortedDates = Object.keys(groupedMovements).sort((a, b) => new Date(b) - new Date(a));
+
+        sortedDates.forEach((date) => {
+            const formattedDate = formatDate(date);
+
+            let dateDiv = document.querySelector(`#date-${date}`);
+            if (!dateDiv) {
+                dateDiv = document.createElement('div');
+                dateDiv.id = `date-${date}`;
+                dateDiv.classList.add('date-item');
+                movementsList.appendChild(dateDiv);
+            }
+
+            const table = document.createElement('div');
+            table.classList.add('movement-table');
+
+            const dateRow = document.createElement('div');
+            dateRow.classList.add('movement-row');
+
+            const dateCell = document.createElement('div');
+            dateCell.classList.add('movement-cell');
+            dateCell.textContent = formattedDate;
+
+            const totalincomeCell = document.createElement('div');
+            totalincomeCell.classList.add('movement-cell');
+            const totalincome = groupedMovements[date].totalincome;
+            const formattedTotalincome = `-$${totalincome}`;
+            totalincomeCell.textContent = formattedTotalincome;
+            totalincomeCell.style.color = '#999693';
+
+            dateRow.appendChild(dateCell);
+            dateRow.appendChild(totalincomeCell);
+            table.appendChild(dateRow);
+
+            groupedMovements[date].movements.forEach((movement) => {
+                const row = document.createElement('div');
+                row.classList.add('movement-row');
+
+                const areaCell = document.createElement('div');
+                areaCell.classList.add('movement-cell');
+                areaCell.textContent = movement.area;
+
+                const amountCell = document.createElement('div');
+                amountCell.classList.add('movement-cell');
+                amountCell.textContent = `$${movement.amount}`;
+                amountCell.style.color = '#999693';
+
+                row.appendChild(areaCell);
+                row.appendChild(amountCell);
+                table.appendChild(row);
+            });
+
+            let movementInfoDiv = dateDiv.querySelector('.movement-info');
+            if (!movementInfoDiv) {
+                movementInfoDiv = document.createElement('div');
+                movementInfoDiv.classList.add('movement-info');
+                dateDiv.appendChild(movementInfoDiv);
+            }
+
+            movementInfoDiv.appendChild(table);
+        });
+    }
+
+    const email = localStorage.getItem('signedInEmail');
+    if (email) {
+        fetchMovements(email)
+            .then(filterincomeMovementsForCurrentMonth)
+            .then(groupincomeMovementsByDate)
+            .then(renderGroupedincomeMovements);
+    } else {
+        console.error("No user is signed in");
+    }
+});
+
+
+document.addEventListener('DOMContentLoaded', () => {
+    const currentDate = new Date();
+    const currentMonth = currentDate.getMonth();
+    const currentYear = currentDate.getFullYear();
+
+    const monthNames = [
+        "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
+        "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"
+    ];
+
+    document.getElementById("monthly-income").textContent = `Ingresos de ${monthNames[currentMonth]}`;
+
+    async function fetchMovements(email) {
+        try {
+            const response = await fetch(`/api/movements/${email}`);
+            if (!response.ok) {
+                throw new Error(`Error: ${response.statusText}`);
+            }
+            const data = await response.json();
+
+            const currentMonthincomes = data.movements.filter(movement => {
+                const movementDate = new Date(movement.date);
+                return (
+                    movementDate.getMonth() === currentMonth &&
+                    movementDate.getFullYear() === currentYear &&
+                    movement.type === "income"
+                );
+            });
+
+            const totalincome = currentMonthincomes.reduce((sum, movement) => sum + movement.amount, 0);
+
+            document.getElementById("quantity").textContent = `$${totalincome.toLocaleString()}`;
+        } catch (error) {
+            console.error("Error fetching movements:", error);
+            document.getElementById("quantity").textContent = "Error fetching data.";
+        }
+    }
+
+    const email = localStorage.getItem('signedInEmail');
+    fetchMovements(email);
+});
 
 const iconGrid = document.getElementById("icon-grid");
 let selectedIcon = null; // Track the selected icon
@@ -604,7 +670,7 @@ document.getElementById("add-custom-area-popup").addEventListener("click", (e) =
     const backgroundColor = document.getElementById("custom-area-background").value;
     const iconUrl = selectedIconElement.dataset.iconUrl;
 
-    location.reload();
+    console.log({ areaName, backgroundColor, iconUrl });
 
     // Submit the data to your server or handle it as needed
 });
